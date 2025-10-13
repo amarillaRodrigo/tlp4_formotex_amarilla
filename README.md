@@ -137,3 +137,20 @@ Authorization: Bearer <token>
   "locationId": "ubicacion_id"
 }
 
+
+**Docker Compose**
+- Copiar `./.env.example` a `./.env` y ajustar valores.
+- Construir y levantar los servicios: `docker compose up --build -d`
+- Verificar salud: `http://localhost:4000/api/health`
+- Detener servicios: `docker compose down`
+- Datos de Mongo se guardan en el volumen `mongo_data`.
+
+**Postman**
+- Importar colección: `postman/FORMOTEX.postman_collection.json`.
+- Importar entorno: `postman/FORMOTEX-local.postman_environment.json` y seleccionarlo como entorno activo para que las solicitudes HTTP funcionen.
+- Ejecutar `Auth / Login (Admin)`; el test guarda automáticamente `token` en el entorno.
+- Usar endpoints protegidos (heredan Bearer `{{token}}`):
+  - `Users / Me`, `Users / List (ADMIN)`
+  - `Equipment` (listar, crear, actualizar, asignar, transferir)
+  - `Locations` (listar, crear)
+- Variables útiles en el entorno: `equipmentId`, `userId`, `locationId` (ajustar para requests por ID).
